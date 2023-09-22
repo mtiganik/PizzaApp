@@ -15,7 +15,9 @@ const PizzaDataInput = () => {
       <Button title={'Add ' + counter.toString() + ' ' + appContext.personCount} 
       onPress={() => {
         setCounter(counter +1);
-        appContext.personCount = appContext.personCount +1
+        console.log(appContext.addOneToCount)
+        appContext.addOneToCount!();
+        // appContext.personCount = appContext.personCount +1
       }}/>
     </View>
   )

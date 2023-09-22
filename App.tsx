@@ -4,32 +4,35 @@ import {StyleSheet,Text,View} from 'react-native';
 import Header from './src/components/Header';
 import UserDataInput from './src/components/UserDataInput';
 import PizzaDataInput from './src/components/PizzaDataInput';
+import { AppContext, DefaultAppState, IAppContext } from './src/context/app_context';
 
 export default function App() {
-  const[pizzaState, setPizzaState] = useState({
-    personCount: 1,
-    onePersonEats: 150,
-    newPizzaDiameter: 24, 
-    newPizzaPrice: 15.75,
-    calculatedPizzas: []
-  })
+
+  const[pizzaState, setPizzaState] = useState(DefaultAppState )
+  
+  const updateAddone = () => {
+    setPizzaState({...pizzaState, personCount: pizzaState.personCount +1 })
+  }
   
   return (
-    <View style={styles.container}>
-  <View style={{flex: 1,flexGrow: 1,}}>
-          <Header/>
-    <UserDataInput/>
-    <UserDataInput/>
-    <PizzaDataInput/>
-    </View>
-    <View style={{
+    <AppContext.Provider value={{...pizzaState, addOneToCount: updateAddone}} >
+
+      <View style={styles.container}>
+        <View style={{ flex: 1, flexGrow: 1, }}>
+          <Header />
+          <UserDataInput />
+          <UserDataInput />
+          <PizzaDataInput />
+        </View>
+        <View style={{
           flex: 1,
           flexGrow: 1,
         }}>
-    <Text>{JSON.stringify(pizzaState, undefined, 4)}</Text>
-    </View>
+          <Text>{JSON.stringify(pizzaState, undefined, 4)}</Text>
+        </View>
 
-    </View>
+      </View>
+    </AppContext.Provider>
   );
 }
 

@@ -10,14 +10,16 @@ export interface IAppContext{
   onePersonEats: number,
   newPizzaDiameter: number, 
   newPizzaPrice: number,
-  calculatedPizzas: IPizzaCalculation[]
+  calculatedPizzas: IPizzaCalculation[];
+  addOneToCount?: () => void;
 
 }
 
-export const AppContext = React.createContext<IAppContext>({
+export const DefaultAppState: IAppContext ={
   personCount: 1,
   onePersonEats: 150,
   newPizzaDiameter: 24,
   newPizzaPrice: 15.75,
-  calculatedPizzas: []
-});
+  calculatedPizzas: [],
+}
+export const AppContext = React.createContext<IAppContext>(DefaultAppState)
